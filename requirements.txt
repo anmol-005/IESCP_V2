@@ -18,6 +18,7 @@ Flask-Security-Too==5.5.2
 Flask-SQLAlchemy==3.1.1
 Flask-WTF==1.2.2
 flask-mail
+flask-caching
 greenlet==3.0.3
 idna==3.10
 importlib_resources==6.4.5

@@ -1,4 +1,3 @@
-
 from functools import cache
 from flask import jsonify, render_template,  request
 from extensions import db 
@@ -148,8 +147,6 @@ def create_routes(app):
     #         else:
     #             return jsonify({'error': 'Unknown role'}), 403
 
-    #     return jsonify({'error': 'Invalid credentials'}), 401
-
     @app.route('/api/login', methods=['POST'])
     def login():
         data = request.get_json()
@@ -216,9 +213,15 @@ def create_routes(app):
             return jsonify({"error": "An unexpected error occurred", "details": str(e)}), 500
 
     @app.route('/api/get_user_data', methods=['GET'])
-    @login_required
-    @cache.cached(timeout=60)
     def get_user_data():
+        # Check if user is authenticated
+        if not current_user.is_authenticated:
+            return jsonify({
+                "isLoggedIn": False,
+                "role": None,
+                "name": None
+            }), 200
+            
         # Check the role of the current user
         if 'sponsor' in [role.name for role in current_user.roles]:
             # Return data for sponsor
@@ -1524,3 +1527,30 @@ def create_routes(app):
     @app.route('/<path:path>')
     def catch_all(path):
         return render_template('index.html')
+
+    @app.route('/api/auth_debug', methods=['GET'])
+    def auth_debug():
+        """Debug endpoint to verify user authentication status"""
+        if current_user.is_authenticated:
+            # Get the roles
+            roles = [role.name for role in current_user.roles]
+            
+            return jsonify({
+                "authenticated": True,
+                "user_id": current_user.id,
+                "email": current_user.email,
+                "roles": roles,
+                "session_info": {
+                    "cookie_configured": app.config.get('SESSION_COOKIE_NAME') is not None
+                }
+            })
+        else:
+            return jsonify({
+                "authenticated": False,
+                "message": "User is not authenticated"
+            })
+
+    @app.route('/test_navbar')
+    def test_navbar():
+        """Test page for navbar functionality"""
+        return render_template('test_navbar.html')

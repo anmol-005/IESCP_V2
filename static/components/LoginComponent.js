@@ -52,6 +52,7 @@ export default {
       };
 
       try {
+        console.log("Attempting login with:", this.email);
         const response = await fetch('/api/login', {
           method: 'POST',
           headers: {
@@ -63,6 +64,7 @@ export default {
         if (!response.ok) {
           const errorData = await response.json();
           this.errorMessage = errorData.error || 'Login failed';
+          console.error("Login failed:", errorData);
           return;
         }
 
@@ -75,7 +77,16 @@ export default {
         }
 
         // Successful login
-        console.log('Login successful:', responseData);
+        console.log("Login successful:", responseData);
+        
+        // Verify session with debug endpoint
+        try {
+          const debugResponse = await fetch('/api/auth_debug');
+          const debugData = await debugResponse.json();
+          console.log("Auth debug data:", debugData);
+        } catch (debugError) {
+          console.error("Error checking debug endpoint:", debugError);
+        }
 
         // Redirect the user based on their role
         window.location.href = responseData.redirect;

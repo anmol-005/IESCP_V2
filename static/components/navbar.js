@@ -87,19 +87,49 @@ export default {
       userRole: null,
     };
   },
-  async created() {
-    try {
-      const response = await fetch('/api/get_user_data');
-      if (response.ok) {
-        const data = await response.json();
-        this.isLoggedIn = data.isLoggedIn;
-        this.userRole = data.role;
-      } else {
-        console.error("Failed to fetch user data:", response.status);
-      }
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
+  created() {
+    this.fetchUserData();
   },
+  watch: {
+    // Watch for route changes to refresh user data
+    '$route': 'fetchUserData'
+  },
+  methods: {
+    async fetchUserData() {
+      try {
+        console.log("Navbar: Fetching user data...");
+        
+        // Regular endpoint
+        const response = await fetch('/api/get_user_data');
+        
+        // Also check debug endpoint
+        try {
+          const debugResponse = await fetch('/api/auth_debug');
+          const debugData = await debugResponse.json();
+          console.log("Navbar: Auth debug data:", debugData);
+        } catch (debugError) {
+          console.error("Navbar: Error checking debug endpoint:", debugError);
+        }
+        
+        if (response.ok) {
+          const data = await response.json();
+          // Set user data from the response
+          this.isLoggedIn = data.isLoggedIn;
+          this.userRole = data.role;
+          console.log("Navbar: User data loaded:", data);
+        } else {
+          console.error("Navbar: Failed to fetch user data:", response.status);
+          // Clear user data on error
+          this.isLoggedIn = false;
+          this.userRole = null;
+        }
+      } catch (error) {
+        console.error("Navbar: Error fetching user data:", error);
+        // Clear user data on error
+        this.isLoggedIn = false;
+        this.userRole = null;
+      }
+    }
+  }
 };
 

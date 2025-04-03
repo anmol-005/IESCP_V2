@@ -35,3 +35,4 @@ typing_extensions==4.12.2
 Werkzeug==3.0.3
 wheel==0.44.0
 WTForms==3.2.1
+redis

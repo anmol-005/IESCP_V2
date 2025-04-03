@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monthly Activity Report</title>
+</head>
+<body>
+    <h1>Monthly Activity Report for {{ sponsor_name }}</h1>
+    <p>Total Advertisements Done: {{ total_ads }}</p>
+    <p>Budget Used: {{ budget_used }}</p>
+    <p>Budget Remaining: {{ budget_remaining }}</p>
+    <p>Growth in Sales: {{ sales_growth }}%</p>
+
+    <h2>Campaign Details</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Campaign Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Budget</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for campaign in campaigns %}
+            <tr>
+                <td>{{ campaign.name }}</td>
+                <td>{{ campaign.start_date }}</td>
+                <td>{{ campaign.end_date }}</td>
+                <td>{{ campaign.budget }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

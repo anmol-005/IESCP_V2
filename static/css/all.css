@@ -1,0 +1,152 @@
+.admin-dashboard {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Header */
+  h1 {
+    font-size: 2.5rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+    color: #495057;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 0.5rem;
+  }
+  
+  .stats {
+    margin-bottom: 2rem;
+  }
+  
+  .stat-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+  
+  .stat-card {
+    background: linear-gradient(135deg, #007bff, #6610f2);
+    color: white;
+    border-radius: 8px;
+    padding: 20px;
+    width: 180px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .stat-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .stat-card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  /* Tables Section */
+  .flagged-table {
+    margin-bottom: 2rem;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  table thead {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  table th,
+  table td {
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  table th {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  table td {
+    font-size: 0.9rem;
+  }
+  
+  /* Buttons */
+  .btn {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  
+  .btn {
+    background-color: #007bff;
+  }
+  
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .stat-cards {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    table th, table td {
+      font-size: 0.8rem;
+      padding: 8px;
+    }
+  
+    h1 {
+      font-size: 2rem;
+    }
+  }
